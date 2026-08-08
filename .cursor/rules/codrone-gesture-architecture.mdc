@@ -1,0 +1,23 @@
+---
+description: Keep CoDrone gesture demo architecture and safety invariants intact
+globs:
+  - src/**/*.py
+  - app.py
+  - config/**/*.yaml
+alwaysApply: true
+---
+
+# CoDrone Gesture Demo Rules
+
+- All flight commands must go through `DroneController` / `CommandBus`.
+- Vision modules (`src/vision/**`) must never import or call `codrone_edu`.
+- Every gesture-derived intent must pass through `GestureFilter` before enqueue.
+- Every flight command must support `simulation_mode` (no hardware side effects when sim is on).
+- Prefer short pulse moves (`move_distance` / brief axis pulse) then hover — never hold roll/pitch continuously from gesture duration.
+- Live hardware path is always: Computer --USB--> Controller (LINK) --radio--> Drone. Never assume a direct PC↔drone radio link.
+- Prefer `drone.connect(port_name)` (alias of open/pair) and surface LINK / USB checklist errors clearly.
+- Always import CoDrone via `src.drone.sdk_compat.load_drone_class()` so `asyncio.sleep` is restored (codrone-edu's desktop patch crashes Streamlit on Connect).
+- On unhandled exceptions during flight, prefer `land()` first; use `emergency_stop()` only for true emergencies or failed soft land.
+- Keep Stage-4 MVP intents (`takeoff`, `hover`, `land`, `emergency_stop`) as the default enabled set unless the user explicitly asks to enable direction control.
+- Use camelCase for variables, PascalCase for types/classes, kebab-case for file names.
+- Handle errors explicitly; never swallow exceptions silently.

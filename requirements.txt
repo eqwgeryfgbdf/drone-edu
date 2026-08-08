@@ -1,0 +1,10 @@
+codrone-edu>=2.8
+mediapipe>=0.10.14
+opencv-python>=4.8.0
+numpy>=1.24.0
+streamlit>=1.32.0
+PyYAML>=6.0.1
+Pillow>=10.0.0
+
+# Dev / tests
+pytest>=8.0.0

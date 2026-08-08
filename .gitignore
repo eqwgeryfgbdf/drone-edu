@@ -1,0 +1,15 @@
+.venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.DS_Store
+logs/*.csv
+logs/*.log
+!logs/.gitkeep
+models/*.task
+!models/.gitkeep
+.streamlit/secrets.toml
+*.mov
+*.mp4

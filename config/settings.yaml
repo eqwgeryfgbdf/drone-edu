@@ -1,0 +1,60 @@
+# CoDrone EDU Gesture Control — runtime settings
+
+simulation_mode: true
+
+camera:
+  device_index: 0
+  width: 640
+  height: 480
+  target_fps: 20
+  mirror: true
+
+gesture:
+  model_path: models/gesture_recognizer.task
+  min_hand_detection_confidence: 0.5
+  min_hand_presence_confidence: 0.5
+  min_tracking_confidence: 0.5
+  num_hands: 2
+  # Confirm same gesture for this duration (seconds) before enqueue
+  confirm_duration_sec: 0.8
+  # Or require this many matching frames in a sliding window
+  confirm_frames_needed: 8
+  confirm_frames_window: 10
+  # Cooldown after a command is accepted
+  cooldown_sec: 1.0
+  # No-hand timeout → auto hover / reset axes
+  no_hand_timeout_sec: 0.5
+  # Palm swipe detection (normalized image coords)
+  swipe_threshold: 0.12
+  swipe_min_frames: 4
+
+drone:
+  # CoDrone EDU connects: Mac/PC --USB--> 遙控器(LINK) --無線--> 無人機
+  # Leave empty/null to auto-detect the controller serial port.
+  # macOS example: /dev/cu.usbmodemXXXX  |  Windows example: COM3
+  port_name: null
+  pair_timeout_sec: 8.0
+  # Short pulse move distance in meters
+  pulse_distance_m: 0.25
+  pulse_speed_mps: 0.5
+  # Safety limits (cm)
+  min_height_cm: 20
+  max_height_cm: 150
+  min_front_range_cm: 40
+  # Prefer soft land; emergency_stop only via explicit E-stop
+  prefer_soft_land_on_error: true
+
+sensors:
+  attitude_hz: 8
+  range_hz: 8
+  battery_hz: 1
+  temperature_hz: 0.5
+
+logging:
+  level: INFO
+  csv_path: logs/flight_log.csv
+  max_event_rows: 200
+
+ui:
+  refresh_ms: 200
+  sensor_history_points: 60

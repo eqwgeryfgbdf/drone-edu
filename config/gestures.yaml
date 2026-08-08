@@ -1,0 +1,40 @@
+# Built-in MediaPipe Gesture Recognizer labels → flight intents.
+# Directional intents also come from landmark heuristics (see gesture_detector).
+
+mappings:
+  Thumb_Up: takeoff
+  Closed_Fist: land
+  Open_Palm: hover
+  Victory: forward
+  Pointing_Up: up
+  # Custom landmark-derived intents (not MediaPipe class labels):
+  Pointing_Down: down
+  Swipe_Left: left
+  Swipe_Right: right
+  Two_Hands_Open: emergency_stop
+
+# Which intents are enabled in the current demo stage.
+# Stage 4 MVP: takeoff / hover / land only.
+enabled_intents:
+  - takeoff
+  - hover
+  - land
+  - emergency_stop
+  # Uncomment for stage 5 directional control:
+  # - forward
+  # - up
+  # - down
+  # - left
+  # - right
+
+display_names:
+  takeoff: 起飛
+  land: 降落
+  hover: 懸停
+  forward: 向前
+  up: 上升
+  down: 下降
+  left: 向左
+  right: 向右
+  emergency_stop: 緊急停止
+  none: —
